@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 interface ResourceCardProps {
-    id: number;
+    id: string | number;
     title: string;
     description: string;
 }
@@ -27,7 +27,7 @@ function ResourceCard({ id, title, description}: ResourceCardProps) {
             fontSize: '0.9rem'
         }}
     >
-        Ver Detalle →
+        View Detail →
     </Link>
     </li>
     );

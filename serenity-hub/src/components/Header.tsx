@@ -1,15 +1,20 @@
-import { Link } from 'react-router-dom';
+export default function Header() {
 
-function Header() {
   return (
-    <header style={{ padding: '1rem', borderBottom: '1px solid #e5e7eb', marginBottom: '2rem' }}>
-      <nav style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-        <h1 style={{ margin: 0, fontSize: '1.2rem', color: '#2c7a7b' }}>🌿 Serenity Hub</h1>
-        <Link to="/" style={{ textDecoration: 'none', color: '#4a5568' }}>Inicio</Link>
-        <Link to="/resources" style={{ textDecoration: 'none', color: '#4a5568' }}>Recursos</Link>
-      </nav>
+    <header
+      style={{
+        backgroundColor: "white",
+        color: "#2c7a7b",
+        padding: "15px 0",
+        textAlign: "center",
+        boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
+        width: "100%",
+      }}
+    >
+      <h1 style= {{ margin: "0", fontSize: "40px" }}>
+        🌿 Serenity Hub
+      </h1>
     </header>
   );
 }
 
-export default Header;
