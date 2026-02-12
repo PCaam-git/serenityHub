@@ -9,8 +9,6 @@ interface AdviceData {
   };
 }
 
-
-
 function Home() {
   const [advice, setAdvice] = useState<string>("Loading inspiration...");
 
@@ -71,7 +69,8 @@ function Home() {
       <div className="organic-blob" style={{
         top: '-150px', left: '-150px', 
         width: '500px', height: '500px',
-        backgroundColor: 'var(--color-secondary)'
+        backgroundColor: 'var(--color-secondary)',
+        opacity: 0.4
       }}></div>
 
       {/* Esquina inferior derecha: Coral */}
