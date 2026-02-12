@@ -26,7 +26,7 @@ function Home() {
   // Estilos para la tarjetas de categorías
   const cardStyle = {
     padding: '40px 30px',
-    backgroundColor: 'var(--color-neutral-white)', 
+    backgroundColor: 'var(--bg-card)', 
     borderRadius: '16px', 
     textDecoration: 'none',
     color: 'var(--text-primary)',
@@ -36,7 +36,7 @@ function Home() {
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '220px',
-    border: '1px solid rgba(0,0,0,0.05)', 
+    border: '1px solid var(--border-color)', 
     cursor: 'pointer',
     textAlign: 'center' as const,
     position: 'relative' as const, 
@@ -58,10 +58,10 @@ function Home() {
     }}>
 
 {/* Mejora del contraste con un overlay. Permite la lectura del texto blanco sobre el fondo */}
-      <div style={{
+      <div className="home-overlay"
+        style={{
         position: 'absolute',
         top: 0, left: 0, right: 0, bottom: 0,
-        background: 'linear-gradient(to bottom, rgba(45, 122, 122, 0.8), rgba(45, 122, 122, 0.4))',
         zIndex: 0
       }}></div>
       

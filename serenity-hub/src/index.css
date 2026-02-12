@@ -16,10 +16,21 @@
   --text-primary: var(--color-neutral-dark);
   --text-secondary: #4a5568; 
   --border-color: #e2e8f0;
-  
+
+  /* - VARIABLES DE MODO OSCURO */
+  body.dark-mode {
+  --bg-app: #1a202c;
+  --bg-card: #2d3748;
+  --text-primary: #f7fafc;
+  --text-secondary: #cbd5e0;
+  --border-color: #4a5568;
+    }
+    
   /* -TIPOGRAFÍA- */
   --font-heading: 'Montserrat', sans-serif;
   --font-body: 'Open Sans', sans-serif;
+
+
 }
 
 body {
@@ -48,6 +59,14 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
 }
 
+/* Overlay en Home. Se oscurece en modo oscuro */
+.home-overlay {
+  background: linear-gradient(to bottom, rgba(45, 122, 122, 0.8), rgba(45, 122, 122, 0.4));
+}
+
+body.dark-mode .home-overlay {
+  background: linear-gradient(to bottom, rgba(26, 32, 44, 0.95), rgba(26, 32, 44, 0.85)) !important;
+}
 /* Keyframes para la entrada suave */
 @keyframes fadeInUp {
   from {
