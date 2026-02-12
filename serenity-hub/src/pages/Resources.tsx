@@ -92,9 +92,9 @@ function Resources() {
     padding: "12px 16px",
     borderRadius: "8px",
     border: "1px solid #e2e8f0",
-    backgroundColor: "white",
+    backgroundColor: "var(--bg-card)",
     fontSize: "1rem",
-    color: "#4a5568",
+    color: "var(--text-primary)",
     outline: "none",
     transition: "border-color 0.2s",
     minWidth: "200px"

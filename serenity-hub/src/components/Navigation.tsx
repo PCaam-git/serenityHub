@@ -1,6 +1,34 @@
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
 export default function Navigation() {
+    // Estado: ¿está en modo oscuro?
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        return true;  // ← Valor inicial
+      }
+    return false;
+});
+
+
+    // Función para cambiar el tema
+    const toggleTheme = () => {
+      if (isDarkMode) {
+        // Cambiar a claro
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('theme', 'light');
+        setIsDarkMode(false);
+      } else {
+        // Cambiar a oscuro
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+        setIsDarkMode(true);
+      } 
+    };
+
+
     return (
      <nav
       style={{
@@ -43,6 +71,23 @@ export default function Navigation() {
         >
             Resources
             </NavLink>
-        </nav>
+
+        {/* Botón de tema */}
+        <button
+        onClick={toggleTheme}
+        style={{
+          marginLeft: "auto",
+          padding: "8px 16px",
+          borderRadius: "8px",
+          border: "none",
+          backgroundColor: "rgba(255,255,255,0.2)",
+          color: "white",
+          cursor: "pointer",
+          fontSize: "1.2rem"
+        }}
+        >
+          {isDarkMode ?  "☀️" : "🌙"}
+        </button>
+      </nav>
     );
 }
