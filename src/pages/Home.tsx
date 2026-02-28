@@ -9,16 +9,26 @@ interface AdviceData {
 }
 
 function Home() {
-  const [advice, setAdvice] = useState<string>("Loading inspiration...");
+  const [advice, setAdvice] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("https://api.adviceslip.com/advice")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Could not load the daily inspiration.");
+        }
+        return res.json();
+      })
       .then((data: AdviceData) => {
         setAdvice(data.slip.advice);
+        setLoading(false);
       })
-      .catch(() => {
-        setAdvice("Breathe deep and keep going");
+      .catch((err) => {
+        console.error(err);
+        setError("Breathe deep and keep going");
+        setLoading(false);
       });
   }, []);
 
@@ -40,7 +50,13 @@ function Home() {
 
         <div className="advice-card animate-entry delay-1">
           <p className="advice-card__label">Daily inspiration</p>
-          <p className="advice-card__text">"{advice}"</p>
+          {loading ? (
+            <p className="advice-card__text">Loading inspiration...</p>
+          ) : error ? (
+            <p className="advice-card__text">{error}</p>
+          ) : (
+            <p className="advice-card__text">"{advice}"</p>
+          )}
         </div>
 
         <div className="home-page__category-area">
