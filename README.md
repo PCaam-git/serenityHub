@@ -1,73 +1,165 @@
-# React + TypeScript + Vite
+# Serenity Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Serenity Hub es un proyecto educativo desarrollado con React, TypeScript y Vite.
+Consiste en una aplicacion web de una sola pagina orientada a la consulta de recursos relacionados con el bienestar y la salud mental.
 
-Currently, two official plugins are available:
+## Descripcion general
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+La aplicacion permite:
 
-## React Compiler
+- mostrar una frase diaria obtenida desde una API en la pagina principal
+- navegar entre distintas vistas mediante rutas
+- consultar un listado de recursos cargados desde una API externa
+- buscar recursos por texto
+- filtrar recursos por autor
+- ordenar los resultados alfabeticamente
+- acceder al detalle de cada recurso mediante una ruta dinamica
+- cambiar entre tema claro y oscuro y conservar la preferencia
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tecnologias utilizadas
 
-## Expanding the ESLint configuration
+- React 19
+- TypeScript
+- Vite
+- React Router DOM
+- CSS con variables globales y clases reutilizables
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## APIs utilizadas
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Advice Slip API
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Se utiliza en la pagina principal para mostrar la frase diaria.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- `https://api.adviceslip.com/advice`
+
+### Open Library API
+
+Se utiliza para cargar la lista de recursos y la pagina de detalle.
+
+- `https://openlibrary.org/subjects/:category.json?limit=20`
+- `https://openlibrary.org/works/:id.json`
+- `https://covers.openlibrary.org/b/id/:coverId-M.jpg`
+
+## Estructura de la aplicacion
+
+### Home
+
+La pagina principal incluye:
+
+- un mensaje de bienvenida
+- una frase diaria obtenida desde API
+- estados de carga y error para esa llamada
+- accesos directos por categoria
+
+### Resources
+
+La pagina de recursos incluye:
+
+- carga de datos desde Open Library
+- busqueda por texto
+- filtro por autor
+- ordenacion A-Z y Z-A
+- contador de resultados
+- mensaje cuando no hay coincidencias
+
+### Resource Detail
+
+La vista de detalle:
+
+- utiliza una ruta dinamica con `id`
+- muestra titulo, portada y descripcion del recurso
+
+### 404
+
+La aplicacion incluye una vista para rutas no existentes.
+
+## Componentes reutilizables
+
+El proyecto utiliza, entre otros, estos componentes funcionales reutilizables:
+
+- `Header`
+- `Navigation`
+- `Footer`
+- `Title`
+- `ResourceCard`
+- `LoadingSpinner`
+- `ErrorMessage`
+
+## Sistema de tema
+
+La aplicacion incorpora un cambio entre tema claro y oscuro.
+
+Su funcionamiento es el siguiente:
+
+- la preferencia del usuario se guarda en `localStorage`
+- se aplica la clase `dark-mode` al elemento `body`
+- las variables CSS actualizan los colores globales de la interfaz
+
+## Estructura del proyecto
+
+```text
+src/
+  components/
+  pages/
+  App.tsx
+  index.css
+  main.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Instalacion
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Si utilizas pnpm:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm install
 ```
+
+Si prefieres npm:
+
+```bash
+npm install
+```
+
+## Scripts disponibles
+
+Iniciar el entorno de desarrollo:
+
+```bash
+pnpm dev
+```
+
+Generar la build de produccion:
+
+```bash
+pnpm build
+```
+
+Previsualizar la build:
+
+```bash
+pnpm preview
+```
+
+Ejecutar el linter:
+
+```bash
+pnpm lint
+```
+
+## Objetivos academicos trabajados
+
+Este proyecto sirve para practicar:
+
+- desarrollo basado en componentes con React
+- enrutado en una SPA
+- rutas dinamicas
+- consumo de APIs
+- manejo de estados de carga y error
+- reutilizacion de componentes
+- filtrado y ordenacion de datos
+- persistencia de preferencias con `localStorage`
+
+## Notas
+
+- El proyecto esta planteado para ser sencillo, legible y facil de explicar en un contexto academico.
+- La pagina principal mantiene los blobs decorativos y la linea SVG, pero prescinde de la imagen de fondo para conseguir un diseño mas limpio.
