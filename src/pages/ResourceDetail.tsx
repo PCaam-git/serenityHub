@@ -19,12 +19,12 @@ function ResourceDetail() {
     fetch(`https://openlibrary.org/works/${id}.json`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("No se pudo encontrar el libro");
+          throw new Error("The book could not be found");
         }
         return response.json();
       })
       .then((data) => {
-        let desc = "Sin descripción disponible.";
+        let desc = "No description available.";
         if (data.description) {
           if (typeof data.description === 'string') {
             desc = data.description;
@@ -42,14 +42,14 @@ function ResourceDetail() {
       })
       .catch((err) => {
         console.error(err);
-        setError("Error al cargar el detalle del libro.");
+        setError("Could not load the book details.");
         setLoading(false);
       });
   }, [id]);
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
-  if (!resource) return <ErrorMessage message="Libro no encontrado" />;
+  if (!resource) return <ErrorMessage message="Book not found." />;
 
   return (
     <div className="detail-page">
