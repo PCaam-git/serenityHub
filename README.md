@@ -97,54 +97,78 @@ Su funcionamiento es el siguiente:
 
 ## Estructura del proyecto
 
-```text
 src/
   components/
   pages/
   App.tsx
   index.css
   main.tsx
-```
+
 
 ## Instalacion
 
 Si utilizas pnpm:
 
-```bash
 pnpm install
-```
+
 
 Si prefieres npm:
 
-```bash
 npm install
-```
+
 
 ## Scripts disponibles
 
 Iniciar el entorno de desarrollo:
 
-```bash
-pnpm dev
-```
+pnpm run dev
+
 
 Generar la build de produccion:
 
-```bash
 pnpm build
-```
 
-Previsualizar la build:
 
-```bash
-pnpm preview
-```
 
-Ejecutar el linter:
 
-```bash
-pnpm lint
-```
+## Cumplimiento de requisitos AA1
+
+### Funcionalidades obligatorias
+
+1. `Cumple`:
+   La aplicacion consume 3 endpoints distintos y gestiona estados de carga y error en las llamadas principales.
+   - `https://api.adviceslip.com/advice`
+   - `https://openlibrary.org/subjects/:category.json?limit=20`
+   - `https://openlibrary.org/works/:id.json`
+
+2. `Cumple`:
+   Existe navegacion con React Router, una ruta dinamica `/resources/:id` y una cabecera de navegacion reutilizable y visible en todas las vistas.
+
+3. `Cumple`:
+   La vista de recursos incorpora busqueda por texto, filtro por autor y ordenacion ascendente/descendente sin boton de envio.
+
+4. `Cumple`:
+   El proyecto usa al menos 7 componentes funcionales reutilizables (`Header`, `Navigation`, `Footer`, `Title`, `ResourceCard`, `LoadingSpinner`, `ErrorMessage`) y mantiene una estructura organizada en `components`, `pages` y `utils`.
+
+5. `Cumple con observacion`:
+   En la interfaz se aplican al menos dos Leyes de Gestalt, especialmente Proximidad y Similitud. La justificacion aparece en la documentacion de defensa, pero en este repositorio no hay capturas incluidas como evidencia, por lo que conviene anadirlas en la entrega final.
+
+### Funcionalidades extra
+
+1. `Cumple`:
+   Hay evidencia de trabajo con Git y una estructura compatible con Gitflow (`main`, `develop` y varias ramas `feature/*`).
+
+2. `Cumple`:
+   La aplicacion implementa modo claro/oscuro global y guarda la preferencia en `localStorage`.
+
+3. `Cumple`:
+   La interfaz da retroalimentacion inmediata con contador de resultados y mensaje cuando la lista queda vacia.
+
+4. `No cumple`:
+   No hay un formulario complejo con libreria externa como React Hook Form o Formik.
+
+5. `No cumple`:
+   No hay una integracion interactiva adicional con un servicio externo del tipo Cloudinary, mapas o similar.
 
 ## Objetivos academicos trabajados
 
