@@ -4,9 +4,9 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorMessage from '../components/ErrorMessage';
 
 interface ResourceDetailData {
-title: string;
-description: string;
-covers?: number[];
+  title: string;
+  description: string;
+  covers?: number[];
 }
 
 function ResourceDetail() {
@@ -16,18 +16,15 @@ function ResourceDetail() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-
-
     fetch(`https://openlibrary.org/works/${id}.json`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error("No se pudo encontrar el libro");
+          throw new Error("The book could not be found");
         }
         return response.json();
       })
       .then((data) => {
-        // TRUCO: A veces la descripción viene como texto y otras como objeto
-        let desc = "Sin descripción disponible.";
+        let desc = "No description available.";
         if (data.description) {
           if (typeof data.description === 'string') {
             desc = data.description;
@@ -45,43 +42,34 @@ function ResourceDetail() {
       })
       .catch((err) => {
         console.error(err);
-        setError("Error al cargar el detalle del libro.");
+        setError("Could not load the book details.");
         setLoading(false);
       });
   }, [id]);
 
   if (loading) return <LoadingSpinner />;
   if (error) return <ErrorMessage message={error} />;
-  if (!resource) return <ErrorMessage message="Libro no encontrado" />;
-
+  if (!resource) return <ErrorMessage message="Book not found." />;
 
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
-      <Link to="/resources" style={{ textDecoration: 'none', color: '#2c7a7b' }}>
-        ← Volver a la lista
+    <div className="detail-page">
+      <Link to="/resources" className="back-link">
+        Back to resources
       </Link>
-      
-      <div style={{ 
-        marginTop: '20px', 
-        padding: '30px', 
-        backgroundColor: 'white', 
-        borderRadius: '12px',
-        boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-      }}>
-        <h1 style={{ color: '#2d3748', marginBottom: '10px' }}>{resource.title}</h1>
-      
+
+      <div className="detail-card">
+        <h1 className="detail-card__title">{resource.title}</h1>
+
         {resource.covers && resource.covers.length > 0 && (
-          <img 
-            src={`https://covers.openlibrary.org/b/id/${resource.covers[0]}-M.jpg`} 
-            alt="Portada del libro"
-            style={{ borderRadius: '8px', marginBottom: '20px', maxWidth: '200px' }}
+          <img
+            src={`https://covers.openlibrary.org/b/id/${resource.covers[0]}-M.jpg`}
+            alt="Book cover"
+            className="detail-card__cover"
           />
         )}
 
-        <h3 style={{ color: '#4a5568', fontSize: '1.1rem' }}>Sinopsis:</h3>
-        <p style={{ lineHeight: '1.6', color: '#718096', whiteSpace: 'pre-line' }}>
-          {resource.description}
-        </p>
+        <h2 className="detail-card__subtitle">Synopsis</h2>
+        <p className="detail-card__text">{resource.description}</p>
       </div>
     </div>
   );
