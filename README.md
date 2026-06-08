@@ -224,5 +224,4 @@ Este proyecto sirve para practicar:
 
 ## Notas
 
-- El proyecto esta planteado para ser sencillo, legible y facil de explicar en un contexto academico.
 - La pagina principal mantiene los blobs decorativos y la linea SVG, pero prescinde de una imagen de fondo agregada inicialmente para conseguir un diseño mas limpio.
